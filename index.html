@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>PRINCE SHUVO | Student & Web Developer</title>
+
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Official website of PRINCE SHUVO — Student & Web Developer. Creator of Prince Earning Zone. Explore projects, tutorials, and community links." />
+  <meta name="keywords" content="Prince Shuvo, Web Developer, Student, Prince Earning Zone, Telegram Channel, Tech Tutorials, Frontend Developer, Web Hosting" />
+  <meta name="author" content="PRINCE SHUVO" />
+  <meta name="theme-color" content="#07070d" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PRINCE SHUVO | Student & Web Developer" />
+  <meta property="og:description" content="Building digital experiences with passion & creativity. Join the official Telegram community @PrinceEarningZone." />
+  <meta property="og:image" content="https://cdn.imgchest.com/files/c345ca8901ac.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn.imgchest.com/files/c345ca8901ac.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & RESET (Apple-Inspired Dark Glassmorphism)
+       ========================================================================== */
+    :root {
+      --bg-base: #06060c;
+      --bg-surface: rgba(16, 16, 26, 0.75);
+      --bg-card: rgba(255, 255, 255, 0.035);
+      --bg-card-hover: rgba(255, 255, 255, 0.075);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --border-glass-hover: rgba(139, 92, 246, 0.4);
+
+      --purple: #8b5cf6;
+      --pink: #ec4899;
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --telegram: #0088cc;
+      --telegram-glow: rgba(0, 136, 204, 0.45);
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-full: 9999px;
+
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    input, textarea {
+      user-select: auto;
+      -webkit-user-select: auto;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #06060c; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.35;
+      animation: orbFloat 18s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .orb-purple {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #8b5cf6 0%, rgba(139, 92, 246, 0) 70%);
+      top: -120px;
+      left: 10%;
+    }
+
+    .orb-pink {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #ec4899 0%, rgba(236, 72, 153, 0) 70%);
+      top: 40%;
+      right: -100px;
+      animation-duration: 15s;
+    }
+
+    .orb-cyan {
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, #06b6d4 0%, rgba(6, 182, 212, 0) 70%);
+      bottom: -120px;
+      left: 20%;
+      animation-duration: 22s;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, 35px) scale(1.08); }
+      100% { transform: translate(-35px, 65px) scale(0.95); }
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section {
+      padding: 80px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 15%, #c084fc 55%, #ec4899 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 45px;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.22;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glass-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(139, 92, 246, 0.15);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 24px;
+      min-height: 48px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 30px rgba(236, 72, 153, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-hosting {
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.45);
+    }
+
+    .btn-hosting:hover {
+      background: linear-gradient(135deg, #0891b2, #7c3aed);
+      box-shadow: 0 12px 35px rgba(6, 182, 212, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .btn-telegram {
+      background: linear-gradient(135deg, #0088cc, #00b4d8);
+      color: #fff;
+      box-shadow: 0 8px 25px var(--telegram-glow);
+    }
+
+    .btn-telegram:hover {
+      background: linear-gradient(135deg, #0099e6, #00c4ec);
+      box-shadow: 0 12px 35px rgba(0, 136, 204, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .header {
+      position: fixed;
+      top: 14px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0 16px;
+    }
+
+    .navbar {
+      max-width: 1140px;
+      margin: 0 auto;
+      background: rgba(13, 13, 22, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-full);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .navbar.scrolled {
+      background: rgba(8, 8, 15, 0.96);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover { color: #fff; }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.35rem;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 76px;
+      left: 16px;
+      right: 16px;
+      background: rgba(14, 14, 24, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      transform-origin: top;
+      animation: drawerSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes drawerSlide {
+      from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .mobile-drawer.open { display: flex; }
+
+    .mobile-drawer a.drawer-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 10px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 130px;
+      padding-bottom: 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 7vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-role {
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: clamp(1rem, 3vw, 1.12rem);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 540px;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-row span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .social-icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 1.05rem;
+    }
+
+    .social-icon-circle:hover, .social-icon-circle:active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transform: translateY(-3px) scale(1.08);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .social-icon-circle.tg:hover { color: #0088cc; border-color: #0088cc; }
+    .social-icon-circle.yt:hover { color: #ff0000; border-color: #ff0000; }
+    .social-icon-circle.fb:hover { color: #1877f2; border-color: #1877f2; }
+    .social-icon-circle.ig:hover { color: #e4405f; border-color: #e4405f; }
+    .social-icon-circle.tt:hover { color: #ff0050; border-color: #ff0050; }
+    .social-icon-circle.wa:hover { color: #10b981; border-color: #10b981; }
+
+    .hero-avatar-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: clamp(230px, 60vw, 340px);
+      height: clamp(230px, 60vw, 340px);
+      border-radius: 50%;
+      padding: 7px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(236, 72, 153, 0.6), rgba(6, 182, 212, 0.8));
+      box-shadow: 0 0 70px rgba(139, 92, 246, 0.35);
+      animation: floatAvatar 6s ease-in-out infinite alternate;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #0d0d18;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes floatAvatar {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-12px); }
+    }
+
+    .status-chip {
+      position: absolute;
+      bottom: 4px;
+      right: -10px;
+      background: rgba(18, 18, 30, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 9px 16px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(139, 92, 246, 0.2);
+      animation: floatBadge 5s ease-in-out infinite alternate;
+      z-index: 3;
+    }
+
+    .status-chip-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.25));
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c084fc;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    @keyframes floatBadge {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .skills-grid, .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card, .service-card {
+      padding: clamp(24px, 4vw, 32px);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: #c084fc;
+      margin-bottom: 18px;
+    }
+
+    .skill-unit { margin-bottom: 16px; }
+    .skill-unit:last-child { margin-bottom: 0; }
+    .skill-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+      border-radius: 20px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-screen {
+      height: 190px;
+      background: #121222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .project-info {
+      padding: 22px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-badge {
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-dim);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 34px;
+    }
+
+    .contact-card-box {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: 14px;
+    }
+
+    .contact-box-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .c-tg { background: rgba(0, 136, 204, 0.15); color: #38bdf8; border: 1px solid rgba(0, 136, 204, 0.35); }
+    .c-wa { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .c-mail { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .c-yt { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .social-shelf { padding: 20px; }
+    .social-pills-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .social-pill:hover { background: rgba(255, 255, 255, 0.1); color: #fff; transform: translateY(-2px); }
+
+    .contact-form-box { padding: clamp(22px, 4vw, 34px); }
+    .input-group { margin-bottom: 16px; }
+    .input-label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+    .input-field, .textarea-field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .input-field:focus, .textarea-field:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 14px rgba(139, 92, 246, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .textarea-field { resize: vertical; min-height: 110px; }
+
+    .footer {
+      padding: 40px 0 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      position: relative;
+      z-index: 2;
+    }
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy { color: var(--text-dim); font-size: 0.86rem; }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(20, 20, 32, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 99;
+    }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+
+    @media (max-width: 992px) {
+      .hero { padding-top: 115px; padding-bottom: 50px; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+      .hero-avatar-area { order: 1; margin-bottom: 15px; }
+      .hero-content { order: 2; display: flex; flex-direction: column; align-items: center; }
+      .hero-role, .hero-btns, .social-row { justify-content: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .telegram-spotlight-grid { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      .telegram-spotlight-grid .btn-telegram { width: 100%; max-width: 320px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links, .nav-btn { display: none; }
+      .mobile-menu-btn { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 60px 0; }
+      .container { padding: 0 16px; }
+      .status-chip {
+        bottom: -16px;
+        right: 50%;
+        transform: translateX(50%);
+        width: max-content;
+        max-width: 95%;
+        padding: 8px 14px;
+        animation: none;
+      }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .hero-btns .btn { width: 100%; }
+      .footer-flex { flex-direction: column; text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-bg">
+    <div class="glow-orb orb-purple"></div>
+    <div class="glow-orb orb-pink"></div>
+    <div class="glow-orb orb-cyan"></div>
+  </div>
+  <div class="grid-overlay"></div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <nav class="navbar" id="navbar">
+      <a href="#home" class="brand">
+        <img src="https://cdn.imgchest.com/files/c345ca8901ac.png" alt="Prince Shuvo" class="brand-avatar" />
+        <span>PRINCE SHUVO</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#hosting" class="nav-link" style="color: #06b6d4; font-weight: 700;"><i class="fa-solid fa-cloud-arrow-up"></i> Hosting</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-hosting nav-btn" style="padding: 8px 16px; font-size: 0.85rem; min-height: 40px;">
+          <i class="fa-solid fa-rocket"></i> Free Hosting
+        </a>
+        <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp nav-btn" style="padding: 8px 16px; font-size: 0.85rem; min-height: 40px;">
+          <i class="fa-brands fa-whatsapp"></i> Chat WhatsApp
+        </a>
+        <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#home" class="drawer-link">Home</a>
+    <a href="#hosting" class="drawer-link" style="color: #06b6d4; font-weight: 700;"><i class="fa-solid fa-cloud-arrow-up"></i> Free Web Hosting</a>
+    <a href="#about" class="drawer-link">About</a>
+    <a href="#skills" class="drawer-link">Skills</a>
+    <a href="#services" class="drawer-link">Services</a>
+    <a href="#projects" class="drawer-link">Projects</a>
+    <a href="#contact" class="drawer-link">Contact</a>
+    <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-hosting" style="margin-top: 6px; width: 100%;">
+      <i class="fa-solid fa-rocket"></i> Launch Free Hosting Engine 🚀
+    </a>
+    <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="margin-top: 4px; width: 100%;">
+      <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+    </a>
+  </div>
+
+  <main>
+    <!-- HERO SECTION (MAIN SCREEN) -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content">
+            <div class="badge">
+              <span class="badge-dot"></span> Student & Web Developer
+            </div>
+
+            <h1 class="hero-title">
+              Hi, I'm <br />
+              <span class="gradient-text">PRINCE SHUVO</span>
+            </h1>
+
+            <div class="hero-role">
+              <i class="fa-solid fa-terminal"></i> Student & Web Developer
+            </div>
+
+            <p class="hero-desc">
+              "Building digital experiences with passion & creativity." Developing responsive web applications, modern interfaces, and managing the <strong>Prince Earning Zone</strong> community.
+            </p>
+
+            <div class="hero-btns">
+              <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-hosting">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Free Web Hosting 🚀
+              </a>
+              <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">
+                <i class="fa-brands fa-telegram"></i> Telegram Channel
+              </a>
+              <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Me
+              </a>
+              <a href="https://youtube.com/@PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube
+              </a>
+            </div>
+
+            <div class="social-row">
+              <span>Connect:</span>
+              <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="social-icon-circle tg" title="Telegram Channel">
+                <i class="fa-brands fa-telegram"></i>
+              </a>
+              <a href="https://youtube.com/@PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="social-icon-circle yt" title="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+              <a href="https://www.facebook.com/share/1CLcHHhvtY/" target="_blank" rel="noopener noreferrer" class="social-icon-circle fb" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/princeshuvo.official?igsh=MXNmZjh1b2Rob3Z5dw==" target="_blank" rel="noopener noreferrer" class="social-icon-circle ig" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.tiktok.com/@princeshuvo.officials" target="_blank" rel="noopener noreferrer" class="social-icon-circle tt" title="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+              <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="social-icon-circle wa" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-avatar-area">
+            <div class="avatar-wrapper">
+              <div class="avatar-inner">
+                <img src="https://cdn.imgchest.com/files/c345ca8901ac.png" alt="PRINCE SHUVO" class="avatar-img" />
+              </div>
+            </div>
+
+            <div class="status-chip">
+              <div class="status-chip-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <div style="text-align: left;">
+                <strong style="display:block; font-size: 0.9rem; color: #fff; font-weight: 700;">Student & Web Developer</strong>
+                <span style="font-size: 0.74rem; color: #38bdf8; font-weight: 600;">Creative Coder</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCE SHUVO WEB HOSTING SPOTLIGHT BANNER -->
+    <section class="section" id="hosting" style="padding-top: 0; padding-bottom: 25px;">
+      <div class="container">
+        <div class="glass-card" style="padding: clamp(24px, 4vw, 36px); border: 1.5px solid rgba(6, 182, 212, 0.45); background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.12) 100%); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; box-shadow: 0 15px 40px rgba(6, 182, 212, 0.15);">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, #06b6d4, #8b5cf6); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #fff; box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4); flex-shrink: 0;">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 12px; border-radius: var(--radius-full); background: rgba(6, 182, 212, 0.2); border: 1px solid rgba(6, 182, 212, 0.4); color: #38bdf8; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">
+                <i class="fa-solid fa-bolt"></i> Official Cloud Platform
+              </div>
+              <h3 style="font-size: clamp(1.3rem, 4vw, 1.75rem); font-weight: 800; color: #fff; margin-bottom: 4px;">PRINCE SHUVO WEB HOSTING</h3>
+              <p style="color: var(--text-muted); font-size: clamp(0.88rem, 3vw, 0.98rem); max-width: 600px;">
+                আপনার HTML কোড বা সম্পূর্ণ ZIP ফাইল আপলোড করে ১ ক্লিকেই ওয়েবসাইট লাইভ করুন সম্পূর্ণ ফ্রিতে!
+              </p>
+            </div>
+          </div>
+          <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-hosting" style="padding: 14px 28px; font-size: 1rem;">
+            <i class="fa-solid fa-rocket"></i> হোস্ট করুন এখনই ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELEGRAM SPOTLIGHT -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="telegram-spotlight-card">
+          <div class="telegram-spotlight-grid">
+            <div class="telegram-badge-icon">
+              <i class="fa-brands fa-telegram"></i>
+            </div>
+            
+            <div class="telegram-info">
+              <h3>
+                Join Prince Earning Zone on Telegram
+                <span class="telegram-tag">Official Channel</span>
+              </h3>
+              <p>
+                Get instant access to verified online earning tutorials, web development tricks, free resources, and official community announcements directly from Prince Shuvo.
+              </p>
+            </div>
+
+            <div>
+              <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="btn btn-telegram" style="padding: 14px 28px;">
+                <i class="fa-solid fa-paper-plane"></i> Join Telegram Channel
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">About Prince Shuvo</div>
+          <h2 class="section-title">Driven by Learning & <span class="gradient-text">Modern Web Tech</span></h2>
+          <p class="section-desc">Balancing academic studies with modern frontend development and educational content creation.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I am <strong>PRINCE SHUVO</strong>, an enthusiastic student and web developer. I focus on developing clean, intuitive, and modern web interfaces that deliver lightning-fast speed and effortless responsiveness across all screens.
+            </p>
+            <p>
+              Along with programming, I lead the <strong>Prince Earning Zone</strong> platforms on YouTube and Telegram, sharing practical tech tutorials, digital skills, and student earning guides.
+            </p>
+
+            <div class="about-tags" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;">
+              <div class="tag-point" style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> Clean Code & UI</div>
+              <div class="tag-point" style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> High Performance</div>
+              <div class="tag-point" style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> Responsive Design</div>
+              <div class="tag-point" style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> Active Hub</div>
+            </div>
+          </div>
+
+          <div class="stats-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="glass-card stat-card" style="padding: 24px 18px; text-align: center;">
+              <div class="stat-number" style="font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 800; line-height: 1; margin-bottom: 6px; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">100%</div>
+              <div class="stat-desc" style="color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; font-weight: 600;">Dedication</div>
+            </div>
+            <div class="glass-card stat-card" style="padding: 24px 18px; text-align: center;">
+              <div class="stat-number" style="font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 800; line-height: 1; margin-bottom: 6px; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">24/7</div>
+              <div class="stat-desc" style="color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; font-weight: 600;">Support</div>
+            </div>
+            <div class="glass-card stat-card" style="padding: 24px 18px; text-align: center;">
+              <div class="stat-number" style="font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 800; line-height: 1; margin-bottom: 6px; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">6+</div>
+              <div class="stat-desc" style="color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; font-weight: 600;">Social Hubs</div>
+            </div>
+            <div class="glass-card stat-card" style="padding: 24px 18px; text-align: center;">
+              <div class="stat-number" style="font-size: clamp(2rem, 6vw, 2.6rem); font-weight: 800; line-height: 1; margin-bottom: 6px; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Fast</div>
+              <div class="stat-desc" style="color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; font-weight: 600;">Clean UX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">Skillset</div>
+          <h2 class="section-title">My Technical <span class="gradient-text">Arsenal</span></h2>
+          <p class="section-desc">Technologies and skills I leverage for web development and digital media.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="glass-card skill-card">
+            <div class="card-icon"><i class="fa-brands fa-html5"></i></div>
+            <h3>Frontend Core</h3>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>HTML5 / Semantic Structure</span> <span>95%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>CSS3 / Flexbox & CSS Grid</span> <span>90%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>JavaScript (ES6+)</span> <span>85%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 85%;"></div></div>
+            </div>
+          </div>
+
+          <div class="glass-card skill-card">
+            <div class="card-icon" style="color: var(--cyan); border-color: rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.15);">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <h3>Design & Frameworks</h3>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>Tailwind CSS & Modern Utility</span> <span>88%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 88%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>Responsive UI / Mobile Layouts</span> <span>92%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 92%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>Dark Glassmorphism Design</span> <span>94%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 94%;"></div></div>
+            </div>
+          </div>
+
+          <div class="glass-card skill-card">
+            <div class="card-icon" style="color: #38bdf8; border-color: rgba(0, 136, 204, 0.3); background: rgba(0, 136, 204, 0.15);">
+              <i class="fa-brands fa-telegram"></i>
+            </div>
+            <h3>Community & Media</h3>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>Telegram Channel Management</span> <span>95%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>YouTube Video Production</span> <span>90%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-unit">
+              <div class="skill-label-row"><span>Tech & Online Earning Content</span> <span>88%</span></div>
+              <div class="progress-track"><div class="progress-bar" style="width: 88%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">What I Offer</div>
+          <h2 class="section-title">Services & <span class="gradient-text">Solutions</span></h2>
+          <p class="section-desc">Tailored digital services crafted with speed, modern aesthetics, and attention to detail.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="glass-card service-card">
+            <div class="card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3>Custom Website Development</h3>
+            <p>Developing fast, modern, and mobile-friendly websites tailored to personal brands, student projects, and businesses.</p>
+          </div>
+
+          <div class="glass-card service-card">
+            <div class="card-icon" style="color: var(--pink); border-color: rgba(236, 72, 153, 0.3); background: rgba(236, 72, 153, 0.15);">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3>Responsive UI/UX Redesign</h3>
+            <p>Revamping outdated layouts into sleek, mobile-first interfaces with dark-mode glassmorphic aesthetics.</p>
+          </div>
+
+          <div class="glass-card service-card">
+            <div class="card-icon" style="color: #10b981; border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.15);">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Speed & Performance</h3>
+            <p>Optimizing page load speeds, clean architecture, and responsive styling for seamless multi-device browsing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">Showcase</div>
+          <h2 class="section-title">Featured <span class="gradient-text">Creations & Hubs</span></h2>
+          <p class="section-desc">A showcase of modern web projects and active educational channels.</p>
+        </div>
+
+        <div class="projects-grid">
+          <div class="glass-card project-card" style="border: 1.5px solid rgba(6, 182, 212, 0.4);">
+            <div class="project-screen" style="background: linear-gradient(135deg, #075985, #06b6d4);">
+              <i class="fa-solid fa-cloud-arrow-up" style="color: #fff; font-size: 2.2rem;"></i>
+            </div>
+            <div class="project-info">
+              <div>
+                <span class="project-tag" style="color: #38bdf8;">Cloud Application</span>
+                <h3>Prince Shuvo Web Hosting</h3>
+                <p>A personal static web hosting platform where anyone can upload HTML or ZIP files and launch instant live websites.</p>
+              </div>
+              <div style="margin-top: 14px; margin-bottom: 12px;">
+                <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn-hosting" style="padding: 8px 18px; font-size: 0.85rem; min-height: 38px;">
+                  Open Hosting Site <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+              <div class="project-badges">
+                <span class="pill-badge">Node.js</span>
+                <span class="pill-badge">Express</span>
+                <span class="pill-badge">Cloud Engine</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card project-card" style="border: 1px solid rgba(0, 136, 204, 0.35);">
+            <div class="project-screen" style="background: linear-gradient(135deg, #004b73, #0088cc);">
+              <i class="fa-brands fa-telegram" style="color: #fff;"></i>
+            </div>
+            <div class="project-info">
+              <div>
+                <span class="project-tag" style="color: #38bdf8;">Official Channel</span>
+                <h3>Prince Earning Zone (Telegram)</h3>
+                <p>The primary Telegram community channel sharing verified online earning techniques, technical updates, and student guides.</p>
+              </div>
+              <div class="project-badges">
+                <span class="pill-badge">Telegram</span>
+                <span class="pill-badge">Updates</span>
+                <span class="pill-badge">Community</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card project-card">
+            <div class="project-screen" style="background: #180909;">
+              <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
+            </div>
+            <div class="project-info">
+              <div>
+                <span class="project-tag" style="color: #ff4d4d;">Video Media</span>
+                <h3>Prince Earning Zone (YouTube)</h3>
+                <p>Video tutorials covering web technologies, digital income avenues, and software guides for students and creators.</p>
+              </div>
+              <div class="project-badges">
+                <span class="pill-badge">YouTube</span>
+                <span class="pill-badge">Tutorials</span>
+                <span class="pill-badge">Guides</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card project-card">
+            <div class="project-screen" style="background: #140b2b;">
+              <i class="fa-solid fa-gem" style="color: #c084fc;"></i>
+            </div>
+            <div class="project-info">
+              <div>
+                <span class="project-tag">Frontend Architecture</span>
+                <h3>Dark Glassmorphism Portfolio</h3>
+                <p>Apple-inspired personal developer website built with responsive CSS, glass cards, and instant messaging integration.</p>
+              </div>
+              <div class="project-badges">
+                <span class="pill-badge">HTML5</span>
+                <span class="pill-badge">CSS3</span>
+                <span class="pill-badge">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">Get in Touch</div>
+          <h2 class="section-title">Let's Connect & <span class="gradient-text">Collaborate</span></h2>
+          <p class="section-desc">Reach out via Telegram, WhatsApp, Email, or the form below for web development and queries.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="glass-card contact-card-box" style="border: 1.5px solid rgba(6, 182, 212, 0.45); background: rgba(6, 182, 212, 0.05);">
+              <div class="contact-box-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.35);"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              <div class="contact-box-details">
+                <h4>Prince Shuvo Web Hosting</h4>
+                <p>princeshuvo.onrender.com</p>
+              </div>
+            </a>
+
+            <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="glass-card contact-card-box" style="border: 1.5px solid rgba(0, 136, 204, 0.45); background: rgba(0, 136, 204, 0.05);">
+              <div class="contact-box-icon c-tg"><i class="fa-brands fa-telegram"></i></div>
+              <div class="contact-box-details">
+                <h4>Telegram Channel (Highlighted)</h4>
+                <p>t.me/PrinceEarningZone</p>
+              </div>
+            </a>
+
+            <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="glass-card contact-card-box">
+              <div class="contact-box-icon c-wa"><i class="fa-brands fa-whatsapp"></i></div>
+              <div class="contact-box-details">
+                <h4>WhatsApp Direct</h4>
+                <p>+8801768250665 (Instant Chat)</p>
+              </div>
+            </a>
+
+            <a href="mailto:sprinceshuvo.official@gmail.com" class="glass-card contact-card-box">
+              <div class="contact-box-icon c-mail"><i class="fa-regular fa-envelope"></i></div>
+              <div class="contact-box-details">
+                <h4>Email Address</h4>
+                <p>sprinceshuvo.official@gmail.com</p>
+              </div>
+            </a>
+
+            <a href="https://youtube.com/@PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="glass-card contact-card-box">
+              <div class="contact-box-icon c-yt"><i class="fa-brands fa-youtube"></i></div>
+              <div class="contact-box-details">
+                <h4>YouTube Channel</h4>
+                <p>youtube.com/@PrinceEarningZone</p>
+              </div>
+            </a>
+
+            <div class="glass-card social-shelf">
+              <h4>All Social Profiles</h4>
+              <div class="social-pills-wrap">
+                <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" class="social-pill" style="border-color: rgba(6, 182, 212, 0.4); color: #06b6d4;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Web Hosting
+                </a>
+                <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="social-pill" style="border-color: rgba(0, 136, 204, 0.4); color: #38bdf8;">
+                  <i class="fa-brands fa-telegram"></i> Telegram
+                </a>
+                <a href="https://youtube.com/@PrinceEarningZone" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube
+                </a>
+                <a href="https://www.facebook.com/share/1CLcHHhvtY/" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <i class="fa-brands fa-facebook-f" style="color: #1877f2;"></i> Facebook
+                </a>
+                <a href="https://www.instagram.com/princeshuvo.official?igsh=MXNmZjh1b2Rob3Z5dw==" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <i class="fa-brands fa-instagram" style="color: #e4405f;"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@princeshuvo.officials" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <i class="fa-brands fa-tiktok" style="color: #ff0050;"></i> TikTok
+                </a>
+                <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" class="social-pill">
+                  <i class="fa-brands fa-whatsapp" style="color: #10b981;"></i> WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card contact-form-box">
+            <form id="contactForm">
+              <div class="input-group">
+                <label class="input-label" for="senderName">Your Name *</label>
+                <input type="text" id="senderName" class="input-field" placeholder="Enter your name" required />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="senderEmail">Your Email *</label>
+                <input type="email" id="senderEmail" class="input-field" placeholder="name@example.com" required />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="senderPhone">WhatsApp / Phone Number</label>
+                <input type="text" id="senderPhone" class="input-field" placeholder="+880 1..." />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="senderMessage">Your Message *</label>
+                <textarea id="senderMessage" class="textarea-field" placeholder="Write your message or project requirements..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fa-brands fa-whatsapp"></i> Send Message to WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-flex">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="https://cdn.imgchest.com/files/c345ca8901ac.png" alt="Prince Shuvo" class="brand-avatar" style="width: 32px; height: 32px;" />
+        <span style="font-weight: 700;">PRINCE SHUVO</span>
+      </div>
+
+      <p class="footer-copy">
+        &copy; <span id="year"></span> PRINCE SHUVO. All Rights Reserved.
+      </p>
+
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <a href="https://princeshuvo.onrender.com/" target="_blank" rel="noopener noreferrer" style="color: #06b6d4; text-decoration: none; font-size: 0.88rem;"><i class="fa-solid fa-cloud-arrow-up"></i> Web Hosting</a>
+        <a href="https://t.me/PrinceEarningZone" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-size: 0.88rem;"><i class="fa-brands fa-telegram"></i> Telegram</a>
+        <a href="https://wa.me/8801768250665" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); text-decoration: none; font-size: 0.88rem;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="#home" style="color: var(--text-muted); text-decoration: none; font-size: 0.88rem;">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const navbar = document.getElementById('navbar');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+
+      if (window.scrollY > 400) scrollTopBtn.classList.add('visible');
+      else scrollTopBtn.classList.remove('visible');
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+
+    menuToggle.addEventListener('click', () => mobileDrawer.classList.toggle('open'));
+    drawerLinks.forEach(link => link.addEventListener('click', () => mobileDrawer.classList.remove('open')));
+
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const email = document.getElementById('senderEmail').value.trim();
+      const phone = document.getElementById('senderPhone').value.trim() || 'Not specified';
+      const msg = document.getElementById('senderMessage').value.trim();
+      const text = `Hello Prince Shuvo!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${msg}`;
+      const url = `https://wa.me/8801768250665?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      contactForm.reset();
+    });
+
+    // ANTI-INSPECT PROTECTION SHIELD
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+        (e.ctrlKey && ['U', 'u', 'S', 's'].includes(e.key))
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  </script>
+</body>
+</html>
