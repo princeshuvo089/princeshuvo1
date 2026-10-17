@@ -19,20 +19,24 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.2'
 
-      - name: Generate Native Android WebView Project
+      - name: Generate Native Android Project
         run: |
           mkdir -p app/src/main/java/com/princeshuvo/app
-          mkdir -p app/src/main/res/layout
           mkdir -p app/src/main/res/values
           mkdir -p app/src/main/assets
           
-          # Copy your index.html into Android Assets
+          # HTML File check
+          if [ ! -f "index.html" ]; then
+            echo "<h1>PRINCE SHUVO APP</h1>" > index.html
+          fi
           cp index.html app/src/main/assets/index.html
 
-          # 1. Root settings.gradle
+          # 1. settings.gradle
           cat << 'EOF' > settings.gradle
           pluginManagement {
               repositories {
@@ -52,7 +56,7 @@ jobs:
           include ':app'
           EOF
 
-          # 2. Root build.gradle
+          # 2. build.gradle
           cat << 'EOF' > build.gradle
           plugins {
               id 'com.android.application' version '8.2.2' apply false
@@ -75,9 +79,6 @@ jobs:
                   versionName "1.0"
               }
               buildTypes {
-                  release {
-                      minifyEnabled false
-                  }
                   debug {
                       debuggable true
                   }
@@ -93,7 +94,6 @@ jobs:
               <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
               <application
                   android:allowBackup="true"
-                  android:icon="@mipmap/ic_launcher"
                   android:label="PRINCE SHUVO"
                   android:supportsRtl="true"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -111,7 +111,7 @@ jobs:
           </manifest>
           EOF
 
-          # 5. MainActivity.java (Native WebView with WhatsApp & Telegram Link Handlers)
+          # 5. MainActivity.java
           cat << 'EOF' > app/src/main/java/com/princeshuvo/app/MainActivity.java
           package com.princeshuvo.app;
 
@@ -171,13 +171,6 @@ jobs:
               }
           }
           EOF
-
-          # 6. Download Official App Icon
-          LOGO_URL="https://cdn.imgchest.com/files/c345ca8901ac.png"
-          for dir in hdpi mdpi xhdpi xxhdpi xxxhdpi; do
-              mkdir -p "app/src/main/res/mipmap-$dir"
-              curl -sL "$LOGO_URL" -o "app/src/main/res/mipmap-$dir/ic_launcher.png"
-          done
 
       - name: Build Android APK
         run: gradle assembleDebug
