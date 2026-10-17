@@ -1,0 +1,189 @@
+name: Build HTML to Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Generate Native Android WebView Project
+        run: |
+          mkdir -p app/src/main/java/com/princeshuvo/app
+          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/assets
+          
+          # Copy your index.html into Android Assets
+          cp index.html app/src/main/assets/index.html
+
+          # 1. Root settings.gradle
+          cat << 'EOF' > settings.gradle
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+          rootProject.name = "PrinceShuvo"
+          include ':app'
+          EOF
+
+          # 2. Root build.gradle
+          cat << 'EOF' > build.gradle
+          plugins {
+              id 'com.android.application' version '8.2.2' apply false
+          }
+          EOF
+
+          # 3. app/build.gradle
+          cat << 'EOF' > app/build.gradle
+          plugins {
+              id 'com.android.application'
+          }
+          android {
+              namespace 'com.princeshuvo.app'
+              compileSdk 34
+              defaultConfig {
+                  applicationId "com.princeshuvo.app"
+                  minSdk 21
+                  targetSdk 34
+                  versionCode 1
+                  versionName "1.0"
+              }
+              buildTypes {
+                  release {
+                      minifyEnabled false
+                  }
+                  debug {
+                      debuggable true
+                  }
+              }
+          }
+          EOF
+
+          # 4. AndroidManifest.xml
+          cat << 'EOF' > app/src/main/AndroidManifest.xml
+          <?xml version="1.0" encoding="utf-8"?>
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+              <uses-permission android:name="android.permission.INTERNET" />
+              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+              <application
+                  android:allowBackup="true"
+                  android:icon="@mipmap/ic_launcher"
+                  android:label="PRINCE SHUVO"
+                  android:supportsRtl="true"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:usesCleartextTraffic="true">
+                  <activity
+                      android:name=".MainActivity"
+                      android:exported="true"
+                      android:configChanges="orientation|screenSize">
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN" />
+                          <category android:name="android.intent.category.LAUNCHER" />
+                      </intent-filter>
+                  </activity>
+              </application>
+          </manifest>
+          EOF
+
+          # 5. MainActivity.java (Native WebView with WhatsApp & Telegram Link Handlers)
+          cat << 'EOF' > app/src/main/java/com/princeshuvo/app/MainActivity.java
+          package com.princeshuvo.app;
+
+          import android.app.Activity;
+          import android.content.Intent;
+          import android.net.Uri;
+          import android.os.Bundle;
+          import android.webkit.WebSettings;
+          import android.webkit.WebView;
+          import android.webkit.WebViewClient;
+
+          public class MainActivity extends Activity {
+              private WebView webView;
+
+              @Override
+              protected void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+                  webView = new WebView(this);
+                  setContentView(webView);
+
+                  WebSettings settings = webView.getSettings();
+                  settings.setJavaScriptEnabled(true);
+                  settings.setDomStorageEnabled(true);
+                  settings.setDatabaseEnabled(true);
+                  settings.setLoadWithOverviewMode(true);
+                  settings.setUseWideViewPort(true);
+                  settings.setAllowFileAccess(true);
+
+                  webView.setWebViewClient(new WebViewClient() {
+                      @Override
+                      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                          if (url.startsWith("http://") || url.startsWith("https://")) {
+                              if (url.contains("t.me") || url.contains("wa.me") || url.contains("youtube.com") ||
+                                  url.contains("facebook.com") || url.contains("instagram.com") || 
+                                  url.contains("tiktok.com") || url.contains("onrender.com")) {
+                                  try {
+                                      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                      startActivity(intent);
+                                      return true;
+                                  } catch (Exception ignored) {}
+                              }
+                          }
+                          return false;
+                      }
+                  });
+
+                  webView.loadUrl("file:///android_asset/index.html");
+              }
+
+              @Override
+              public void onBackPressed() {
+                  if (webView.canGoBack()) {
+                      webView.goBack();
+                  } else {
+                      super.onBackPressed();
+                  }
+              }
+          }
+          EOF
+
+          # 6. Download Official App Icon
+          LOGO_URL="https://cdn.imgchest.com/files/c345ca8901ac.png"
+          for dir in hdpi mdpi xhdpi xxhdpi xxxhdpi; do
+              mkdir -p "app/src/main/res/mipmap-$dir"
+              curl -sL "$LOGO_URL" -o "app/src/main/res/mipmap-$dir/ic_launcher.png"
+          done
+
+      - name: Build Android APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PRINCE-SHUVO-APP
+          path: app/build/outputs/apk/debug/app-debug.apk
