@@ -36,31 +36,14 @@ jobs:
           fi
           cp index.html app/src/main/assets/index.html
 
-          # Convert and resize your official logo into crisp Android App Icons
-          pip install pillow -q
-          python3 -c "
-          import os, urllib.request
-          from PIL import Image
-
-          url = 'https://cdn.imgchest.com/files/4c29c2dd89f5.jpg'
-          urllib.request.urlretrieve(url, 'logo.jpg')
-          img = Image.open('logo.jpg').convert('RGBA')
-
-          sizes = {
-              'mdpi': (48, 48),
-              'hdpi': (72, 72),
-              'xhdpi': (96, 96),
-              'xxhdpi': (144, 144),
-              'xxxhdpi': (192, 192)
-          }
-
-          for folder, size in sizes.items():
-              path = f'app/src/main/res/mipmap-{folder}'
-              os.makedirs(path, exist_ok=True)
-              resized = img.resize(size, Image.Resampling.LANCZOS)
-              resized.save(f'{path}/ic_launcher.png')
-              resized.save(f'{path}/ic_launcher_round.png')
-          "
+          # Download and convert your logo into crisp Android HD Icons
+          curl -sL -A "Mozilla/5.0" "https://cdn.imgchest.com/files/4c29c2dd89f5.jpg" -o /tmp/logo.jpg
+          for dir in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
+            IFS=':' read -r d s <<< "$dir"
+            mkdir -p "app/src/main/res/mipmap-$d"
+            ffmpeg -i /tmp/logo.jpg -vf "scale=$s:$s" -y "app/src/main/res/mipmap-$d/ic_launcher.png" 2>/dev/null || cp /tmp/logo.jpg "app/src/main/res/mipmap-$d/ic_launcher.png"
+            cp "app/src/main/res/mipmap-$d/ic_launcher.png" "app/src/main/res/mipmap-$d/ic_launcher_round.png"
+          done
 
           # 1. settings.gradle
           cat << 'EOF' > settings.gradle
@@ -112,7 +95,7 @@ jobs:
           }
           EOF
 
-          # 4. AndroidManifest.xml (With custom square & round app icon)
+          # 4. AndroidManifest.xml
           cat << 'EOF' > app/src/main/AndroidManifest.xml
           <?xml version="1.0" encoding="utf-8"?>
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
